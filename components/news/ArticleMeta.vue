@@ -1,19 +1,34 @@
 <script setup lang="ts">
+import type { ArticleMetaItem } from "~/types/article";
+
 defineProps<{
-  author?: string
-  publishedAt?: string
-  readingTime?: string
-  category?: string
-}>()
+  metaItems: ArticleMetaItem[];
+}>();
 </script>
 
 <template>
-  <p class="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs leading-4 text-brand-muted">
-    <span v-if="category" class="font-medium text-brand-black">{{ category }}</span>
-    <span v-if="author">{{ author }}</span>
-    <span v-if="publishedAt" aria-hidden="true">—</span>
-    <time v-if="publishedAt" :datetime="publishedAt">{{ new Date(publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) }}</time>
-    <span v-if="readingTime" aria-hidden="true">—</span>
-    <span v-if="readingTime">{{ readingTime }}</span>
-  </p>
+  <div
+    class="text-xs capitalize"
+  >
+    <template v-for="(meta, index) in metaItems" :key="meta.key">
+      <span
+        v-if="index > 0"
+        aria-hidden="true"
+        class="mx-3"
+        >—</span
+      >
+
+      <time v-if="meta.key === 'publishedAt'" :datetime="meta.datetime">
+        {{ meta.label }}
+      </time>
+
+      <a v-else-if="meta.href" :href="meta.href">
+        {{ meta.label }}
+      </a>
+
+      <span v-else>
+        {{ meta.label }}
+      </span>
+    </template>
+  </div>
 </template>
