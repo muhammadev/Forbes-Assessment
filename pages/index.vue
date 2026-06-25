@@ -1,23 +1,96 @@
 <script setup lang="ts">
-useSeoMeta({ title: 'Forbes Middle East', description: 'Forbes Middle East news and insights.' })
-import { articles } from '~/data/articles'
+import { articles } from "~/data/articles";
+import { categoryHighlights } from "~/data/categoryHighlights";
+import { getFeaturedArticle, getLatestArticles } from "~/utils/articles";
 
-const featuredArticle = articles.find((article) => article.isFeatured)
-const latestArticles = articles.slice(1, 7)
-const compactArticles = articles.slice(7, 10)
+const featuredArticle = getFeaturedArticle();
+const latestArticles = getLatestArticles(7).filter(
+  (article) => article.id !== featuredArticle?.id,
+);
+const worldArticles = articles.slice(7, 11);
+const technologyArticles = articles.filter(
+  (article) =>
+    article.category === "innovation" || article.category === "entrepreneurs",
+);
+const podcastArticles = articles.slice(2, 8);
+const isFeaturedArticleLoading = ref(true);
+const areNewsSectionsLoading = ref(true);
+let featuredArticleLoadingTimer: ReturnType<typeof setTimeout> | undefined;
+let newsSectionsLoadingTimer: ReturnType<typeof setTimeout> | undefined;
+
+onMounted(() => {
+  featuredArticleLoadingTimer = setTimeout(() => {
+    isFeaturedArticleLoading.value = false;
+  }, 500);
+
+  newsSectionsLoadingTimer = setTimeout(() => {
+    areNewsSectionsLoading.value = false;
+  }, 500);
+});
+
+onBeforeUnmount(() => {
+  if (featuredArticleLoadingTimer) {
+    clearTimeout(featuredArticleLoadingTimer);
+  }
+
+  if (newsSectionsLoadingTimer) {
+    clearTimeout(newsSectionsLoadingTimer);
+  }
+});
+
+useSeoMeta({
+  title: "The Forbes News",
+  description:
+    "Latest world, business, technology, health, sports, culture, and politics news.",
+  ogTitle: "The Forbes News",
+  ogDescription:
+    "Latest world, business, technology, health, sports, culture, and politics news.",
+  twitterCard: "summary_large_image",
+});
 </script>
 
 <template>
   <BaseContainer>
-    <section v-if="featuredArticle" class="py-10 sm:py-14">
-      <FeaturedArticle :article="featuredArticle" />
+    <div class="mt-10 md:mt-20 mb-[30px]">
+      <NewsCategoryHighlights :highlights="categoryHighlights" />
+    </div>
+    <section v-if="featuredArticle || isFeaturedArticleLoading" class="my-8 sm:my-10">
+      <NewsFeaturedArticle
+        :article="featuredArticle"
+        :loading="isFeaturedArticleLoading"
+      />
     </section>
-    <CategorySection title="Latest News" :articles="latestArticles" view-all-href="#" />
-    <section class="pb-12 sm:pb-16">
-      <BaseSectionTitle title="Trending" />
-      <div class="mt-6 grid gap-4 lg:grid-cols-3">
-        <CompactArticleItem v-for="article in compactArticles" :key="article.id" :article="article" />
-      </div>
-    </section>
+
+    <NewsLatestNewsGrid
+      :articles="latestArticles"
+      view-all-href="#"
+      :loading="areNewsSectionsLoading"
+    />
+
+    <NewsWorldNewsGrid
+      :articles="worldArticles"
+      view-all-href="#"
+      :loading="areNewsSectionsLoading"
+    />
+
+    <NewsCategorySection
+      title="Technology News"
+      :articles="technologyArticles.slice(0, 4)"
+      :meta-top="true"
+      :loading="areNewsSectionsLoading"
+      :skeleton-count="4"
+      view-all-href="#"
+    />
+
+    <NewsCategorySection
+      title="Podcasts"
+      :articles="podcastArticles"
+      :variant="'horizontal-rich'"
+      :meta-top="false"
+      :meta-keys="['readingTime', 'author']"
+      :loading="areNewsSectionsLoading"
+      :skeleton-count="6"
+      view-all-href="#"
+    />
   </BaseContainer>
 </template>

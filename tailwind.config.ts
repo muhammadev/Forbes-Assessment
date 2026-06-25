@@ -1,4 +1,6 @@
 import type { Config } from 'tailwindcss'
+import defaultTheme from "tailwindcss/defaultTheme"
+
 
 export default <Partial<Config>>{
   theme: {
@@ -7,13 +9,13 @@ export default <Partial<Config>>{
         brand: {
           black: '#111111',
           red: '#e1261c',
-          paper: '#f7f7f5',
-          line: '#d8d8d5',
+          paper: '#F4F4F9',
+          content: '#202124',
           muted: '#666666',
         },
       },
       fontFamily: {
-        sans: ['Arial', 'Helvetica', 'sans-serif'],
+        sans: ['Inter', ...defaultTheme.fontFamily.sans],
         brand: ['Georgia', 'Times New Roman', 'serif'],
       },
       fontSize: {
@@ -25,7 +27,7 @@ export default <Partial<Config>>{
         'heading-6': ['16px', { lineHeight: '1.4' }],
       },
       maxWidth: {
-        content: '1280px',
+        content: '1320px',
       },
     },
   },

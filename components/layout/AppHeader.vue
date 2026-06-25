@@ -1,36 +1,120 @@
 <script setup lang="ts">
 import { categories } from '~/data/categories'
+
+const navigation = computed(() =>
+  categories.map((category) => ({
+    label: category.name,
+    href: `/categories/${category.slug}`,
+  })),
+)
+
+const isNavMarqueePaused = ref(false)
+let resumeNavMarqueeTimer: ReturnType<typeof setTimeout> | undefined
+
+const pauseNavMarquee = () => {
+  isNavMarqueePaused.value = true
+
+  if (resumeNavMarqueeTimer) {
+    clearTimeout(resumeNavMarqueeTimer)
+  }
+
+  resumeNavMarqueeTimer = setTimeout(() => {
+    isNavMarqueePaused.value = false
+  }, 5000)
+}
+
+onBeforeUnmount(() => {
+  if (resumeNavMarqueeTimer) {
+    clearTimeout(resumeNavMarqueeTimer)
+  }
+})
 </script>
 
 <template>
-  <header class="bg-white text-brand-black">
+  <header class="text-brand-content mt-5">
     <BaseContainer>
-      <div class="flex min-h-20 items-center justify-between border-b border-brand-line py-4 sm:min-h-24">
-        <a href="/" class="group inline-flex flex-col leading-none" aria-label="Forbes Middle East home">
-          <span class="font-brand text-3xl font-bold tracking-[-0.07em] sm:text-4xl">FORBES</span>
-          <span class="mt-1 text-[0.6rem] font-bold tracking-[0.22em]">MIDDLE EAST</span>
-        </a>
-
-        <button class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] lg:hidden" type="button" aria-label="Open navigation">
-          <span class="grid gap-1" aria-hidden="true"><span class="block h-px w-4 bg-current" /><span class="block h-px w-4 bg-current" /></span>
-          Menu
-        </button>
-
-        <div class="hidden items-center gap-6 lg:flex">
-          <a href="#" class="text-xs font-bold uppercase tracking-[0.14em] hover:text-brand-red">Subscribe</a>
-          <button type="button" class="text-xs font-bold uppercase tracking-[0.14em] hover:text-brand-red" aria-label="Search">Search</button>
+      <div class="flex items-center justify-between border-y border-brand-content py-3 text-[0.625rem] font-medium leading-none sm:text-xs">
+        <p class="flex items-center gap-1.5"><span aria-hidden="true">
+          <NuxtImg src="/images/globe.svg" width="18px" height="18px" />
+        </span> Thursday, June 18, 2026</p>
+        <div class="flex items-center gap-4">
+          <button type="button" class="font-medium text-sm flex items-center gap-3" aria-label="Open the menu"><span>The Menu</span> <NuxtImg src="/images/caret-right.svg" width="18px" height="18px" /></button>
+          <button type="button" aria-label="Search">
+            <NuxtImg src="/images/search.svg" width="24px" height="24px" />
+          </button>
         </div>
       </div>
 
-      <nav class="hidden lg:block" aria-label="Primary navigation">
-        <ul class="flex items-center gap-7 overflow-x-auto py-4">
-          <li v-for="category in categories" :key="category.id">
-            <a :href="`#${category.slug}`" class="whitespace-nowrap text-xs font-bold uppercase tracking-[0.12em] hover:text-brand-red">
-              {{ category.name }}
-            </a>
-          </li>
-        </ul>
+      <div class="flex justify-center py-6">
+        <NuxtLink to="/" class="relative inline-flex items-start font-brand leading-[0.72] tracking-[-0.075em]" aria-label="Forbes Middle East home">
+          <NuxtImg src="/images/logo.svg" width="326px" height="280px" />
+        </NuxtLink>
+      </div>
+
+      <nav class="border-y border-brand-content" aria-label="Primary navigation">
+        <div
+          class="header-nav-scroll overflow-x-auto overflow-y-hidden sm:overflow-visible"
+          @focusin="pauseNavMarquee"
+          @mouseenter="pauseNavMarquee"
+          @pointerdown="pauseNavMarquee"
+          @scroll="pauseNavMarquee"
+          @touchstart.passive="pauseNavMarquee"
+          @wheel="pauseNavMarquee"
+        >
+          <ul
+            class="header-nav-marquee flex w-max justify-start gap-6 py-1 sm:w-auto sm:justify-center sm:gap-9"
+            :class="{ 'header-nav-marquee-paused': isNavMarqueePaused }"
+          >
+            <li v-for="item in navigation" :key="item.label">
+              <NuxtLink :to="item.href" class="whitespace-nowrap text-xs font-medium hover:text-brand-red">
+                {{ item.label }}
+              </NuxtLink>
+            </li>
+            <li v-for="item in navigation" :key="`duplicate-${item.label}`" class="sm:hidden" aria-hidden="true">
+              <NuxtLink :to="item.href" class="whitespace-nowrap text-xs font-medium" tabindex="-1">
+                {{ item.label }}
+              </NuxtLink>
+            </li>
+          </ul>
+        </div>
       </nav>
     </BaseContainer>
   </header>
 </template>
+
+<style scoped>
+@media (max-width: 639px) {
+  .header-nav-scroll {
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .header-nav-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .header-nav-marquee {
+    animation: header-nav-marquee 18s linear infinite;
+  }
+
+  .header-nav-marquee-paused {
+    animation-play-state: paused;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header-nav-marquee {
+    animation: none;
+  }
+}
+
+@keyframes header-nav-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-50% - 0.75rem));
+  }
+}
+</style>
