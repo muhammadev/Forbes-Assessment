@@ -13,30 +13,8 @@ const technologyArticles = articles.filter(
     article.category === "innovation" || article.category === "entrepreneurs",
 );
 const podcastArticles = articles.slice(2, 8);
-const isFeaturedArticleLoading = ref(true);
-const areNewsSectionsLoading = ref(true);
-let featuredArticleLoadingTimer: ReturnType<typeof setTimeout> | undefined;
-let newsSectionsLoadingTimer: ReturnType<typeof setTimeout> | undefined;
-
-onMounted(() => {
-  featuredArticleLoadingTimer = setTimeout(() => {
-    isFeaturedArticleLoading.value = false;
-  }, 500);
-
-  newsSectionsLoadingTimer = setTimeout(() => {
-    areNewsSectionsLoading.value = false;
-  }, 500);
-});
-
-onBeforeUnmount(() => {
-  if (featuredArticleLoadingTimer) {
-    clearTimeout(featuredArticleLoadingTimer);
-  }
-
-  if (newsSectionsLoadingTimer) {
-    clearTimeout(newsSectionsLoadingTimer);
-  }
-});
+const isFeaturedArticleLoading = ref(false);
+const areNewsSectionsLoading = ref(false);
 
 useSeoMeta({
   title: "The Forbes News",
