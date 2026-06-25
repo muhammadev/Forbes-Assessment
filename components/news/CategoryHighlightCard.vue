@@ -8,9 +8,10 @@ defineProps<{ highlight: CategoryHighlight }>()
     <NuxtImg
       :src="highlight.image.src"
       :alt="highlight.image.alt"
-      width="84px"
-      height="84px"
+      width="84"
+      height="84"
       sizes="84px"
+      format="webp"
       loading="lazy"
       class="aspect-[1/1] w-full rounded bg-zinc-200 object-cover"
     />
