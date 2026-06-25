@@ -12,6 +12,8 @@ defineProps<{ article: Article }>()
         :alt="article.title"
         width="240"
         height="160"
+        sizes="120px"
+        loading="lazy"
         class="aspect-[3/2] w-full rounded-sm bg-zinc-200 object-cover transition-opacity group-hover:opacity-90"
       />
     </NuxtLink>

@@ -35,6 +35,9 @@ withDefaults(defineProps<{ article?: Article; loading?: boolean }>(), {
           :alt="article.title"
           width="1320px"
           height="580px"
+          sizes="100vw lg:1320px"
+          loading="eager"
+          fetchpriority="high"
           class="w-full object-cover transition-transform duration-500 ease-out group-hover:scale-110 group-focus-within:scale-110"
         />
       </div>

@@ -48,6 +48,8 @@ const cardConfig = computed(() =>
           :alt="article.title"
           :width="cardConfig.imgDimensions.width"
           :height="cardConfig.imgDimensions.height"
+          :sizes="cardConfig.sizes"
+          loading="lazy"
           class="w-full object-cover transition-transform duration-500 ease-out group-hover:scale-110 group-focus-within:scale-110"
           :class="cardConfig.imgClasses.img"
         />
@@ -61,11 +63,13 @@ const cardConfig = computed(() =>
           v-if="article.isVideo"
           class="absolute left-1/2 top-1/2 grid h-12 w-12 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white/15 backdrop-blur-[20px]"
         >
-          <NuxtImg
+          <img
             class="translate-x-1/4"
             src="/images/icons/play.svg"
-            width="16px"
-            height="21px"
+            width="16"
+            height="21"
+            alt=""
+            loading="lazy"
           />
         </div>
       </NuxtLink>

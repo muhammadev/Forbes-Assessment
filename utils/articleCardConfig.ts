@@ -5,6 +5,7 @@ export type ArticleCardConfig = {
     width: number
     height: number
   }
+  sizes: string
   containerClasses: string
   imgClasses: {
     wrapper: string
@@ -32,6 +33,7 @@ export function getArticleCardConfig(
     case 'horizontal-compact':
       return {
         imgDimensions: { width: 312, height: 237 },
+        sizes: mediaRight ? '100vw md:312px' : '100vw sm:197px',
         containerClasses: tw(
           `grid ${mediaRight ? 'md:grid-cols-[minmax(180px,1fr)_minmax(180px,312px)]' : 'sm:grid-cols-[minmax(180px,197px)_minmax(180px,1fr)]'} sm:gap-6 md:items-center`,
         ),
@@ -52,6 +54,7 @@ export function getArticleCardConfig(
     case 'horizontal-rich':
       return {
         imgDimensions: { width: 170, height: 200 },
+        sizes: '100vw sm:170px',
         containerClasses: tw(
           'grid gap-[14px] items-start h-auto md:items-center md:h-[200px] sm:grid-flow-col',
         ),
@@ -74,6 +77,7 @@ export function getArticleCardConfig(
     case 'featured-overlay':
       return {
         imgDimensions: { width: 628, height: 490 },
+        sizes: '100vw lg:628px',
         containerClasses: 'relative block h-full',
         imgClasses: {
           wrapper: tw('h-full min-h-[360px] rounded'),
@@ -90,6 +94,7 @@ export function getArticleCardConfig(
     case 'featured-split':
       return {
         imgDimensions: { width: 821, height: 588 },
+        sizes: '100vw lg:660px',
         containerClasses: 'group block h-full relative',
         imgClasses: {
           wrapper: tw('md:h-full min-h-[360px] rounded'),
@@ -108,6 +113,7 @@ export function getArticleCardConfig(
     default:
       return {
         imgDimensions: { width: 432, height: 268 },
+        sizes: '100vw sm:33vw lg:25vw',
         containerClasses: tw('flex flex-col w-full h-full'),
         imgClasses: {
           wrapper: tw('relative rounded-lg'),

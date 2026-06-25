@@ -148,8 +148,10 @@ useHead({
             :alt="article.title"
             width="980"
             height="650"
+            loading="eager"
+            fetchpriority="high"
             class="aspect-[3/2] w-full bg-zinc-200 object-cover"
-            sizes="sm:100vw md:760px"
+            sizes="100vw md:760px"
           />
 
           <header>
@@ -162,7 +164,7 @@ useHead({
                 <div>
                   <p class="text-lg font-medium uppercase leading-none">{{ article.author }}</p>
                   <div class="flex items-center gap-1 mt-2">
-                    <NuxtImg src="/images/icons/calendar.svg" width="22px" height="22px" />
+                    <img src="/images/icons/calendar.svg" width="22" height="22" alt="" loading="lazy" />
                     <NewsArticleMeta class="text-base" :meta-items="articleMetaItems" />
                   </div>
                 </div>

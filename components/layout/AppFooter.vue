@@ -3,7 +3,7 @@
     <BaseContainer>
       <div class="border-t-4 border-brand-black py-4">
         <NuxtLink to="/">
-          <NuxtImg src="/images/logo.svg" width="175px" height="44px" />
+          <img src="/images/logo.svg" width="175" height="44" alt="Forbes Middle East" />
         </NuxtLink>
       </div>
       <div

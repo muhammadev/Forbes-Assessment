@@ -42,19 +42,19 @@ onBeforeUnmount(() => {
     <BaseContainer>
       <div class="flex items-center justify-between border-y border-brand-content py-3 text-[0.625rem] font-medium leading-none sm:text-xs">
         <p class="flex items-center gap-1.5"><span aria-hidden="true">
-          <NuxtImg src="/images/globe.svg" width="18px" height="18px" />
+          <img src="/images/globe.svg" width="18" height="18" alt="" />
         </span> {{ currentDate }}</p>
         <div class="flex items-center gap-4">
-          <button type="button" class="font-medium text-sm flex items-center gap-3" aria-label="Open the menu"><span>The Menu</span> <NuxtImg src="/images/caret-right.svg" width="18px" height="18px" /></button>
+          <button type="button" class="font-medium text-sm flex items-center gap-3" aria-label="Open the menu"><span>The Menu</span> <img src="/images/caret-right.svg" width="18" height="18" alt="" /></button>
           <button type="button" aria-label="Search">
-            <NuxtImg src="/images/search.svg" width="24px" height="24px" />
+            <img src="/images/search.svg" width="24" height="24" alt="" />
           </button>
         </div>
       </div>
 
       <div class="flex justify-center py-6">
         <NuxtLink to="/" class="relative inline-flex items-start font-brand leading-[0.72] tracking-[-0.075em]" aria-label="Forbes Middle East home">
-          <NuxtImg src="/images/logo.svg" width="326px" height="280px" />
+          <img src="/images/logo.svg" width="326" height="280" alt="Forbes Middle East" />
         </NuxtLink>
       </div>
 
