@@ -9,7 +9,7 @@ definePageMeta({
 
 const route = useRoute()
 const slug = computed(() => String(route.params.slug))
-const isCategoryLoading = ref(true)
+const isCategoryLoading = ref(false)
 let categoryLoadingTimer: ReturnType<typeof setTimeout> | undefined
 
 const restartCategoryLoader = () => {
@@ -42,10 +42,6 @@ useSeoMeta({
   description: () => `Latest ${categoryTitle.value.toLowerCase()} news and insights.`,
   ogTitle: () => `${categoryTitle.value} News`,
   ogDescription: () => `Latest ${categoryTitle.value.toLowerCase()} news and insights.`,
-})
-
-onMounted(() => {
-  restartCategoryLoader()
 })
 
 watch(slug, () => {

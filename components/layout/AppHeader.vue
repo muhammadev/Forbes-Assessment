@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import { categories } from '~/data/categories'
 
+const currentDate = new Intl.DateTimeFormat('en-US', {
+  weekday: 'long',
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric',
+}).format(new Date())
+
 const navigation = computed(() =>
   categories.map((category) => ({
     label: category.name,
@@ -36,7 +43,7 @@ onBeforeUnmount(() => {
       <div class="flex items-center justify-between border-y border-brand-content py-3 text-[0.625rem] font-medium leading-none sm:text-xs">
         <p class="flex items-center gap-1.5"><span aria-hidden="true">
           <NuxtImg src="/images/globe.svg" width="18px" height="18px" />
-        </span> Thursday, June 18, 2026</p>
+        </span> {{ currentDate }}</p>
         <div class="flex items-center gap-4">
           <button type="button" class="font-medium text-sm flex items-center gap-3" aria-label="Open the menu"><span>The Menu</span> <NuxtImg src="/images/caret-right.svg" width="18px" height="18px" /></button>
           <button type="button" aria-label="Search">

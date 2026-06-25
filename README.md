@@ -1,5 +1,3 @@
-[] Mention assuming featured video to be a thumbnail rather than an actual video
-
 # Forbes Middle East Assessment
 
 A Nuxt 3 implementation of a responsive Forbes Middle East news experience.

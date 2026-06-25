@@ -7,7 +7,7 @@
         </NuxtLink>
       </div>
       <div
-        class="flex justify-between items-center border-y border-content py-4 font-medium text-sm text-brand-content"
+        class="flex justify-between items-center border-y border-brand-content py-4 font-medium text-sm text-brand-content"
       >
         <div class="flex gap-5">
           <svg
@@ -31,6 +31,8 @@
           <NuxtLink
             to="https://www.instagram.com/ForbesMiddleEast/"
             target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Forbes Middle East on Instagram"
           >
             <svg
               width="28"
@@ -49,6 +51,8 @@
           <NuxtLink
             to="https://www.linkedin.com/company/forbes-middle-east---arab-publisher-house/"
             target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Forbes Middle East on LinkedIn"
           >
             <svg
               width="28"
@@ -67,6 +71,8 @@
           <NuxtLink
             to="https://www.youtube.com/user/ForbesMiddleEast"
             target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Forbes Middle East on YouTube"
           >
             <svg
               width="28"
@@ -82,7 +88,12 @@
             </svg>
           </NuxtLink>
 
-          <NuxtLink to="https://twitter.com/forbesme" target="_blank">
+          <NuxtLink
+            to="https://twitter.com/forbesme"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Forbes Middle East on X"
+          >
             <svg
               width="28"
               height="28"
@@ -97,7 +108,12 @@
             </svg>
           </NuxtLink>
 
-          <NuxtLink to="https://forbesmiddleeast.com" target="_blank">
+          <NuxtLink
+            to="https://forbesmiddleeast.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Forbes Middle East website"
+          >
             <svg
               width="28"
               height="28"

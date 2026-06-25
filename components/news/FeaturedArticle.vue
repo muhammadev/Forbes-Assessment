@@ -25,7 +25,8 @@ withDefaults(defineProps<{ article?: Article; loading?: boolean }>(), {
   </article>
 
   <article v-else-if="article" class="group">
-    <NuxtLink :to="`/articles/${article.slug}`" class="block focus-visible:outline-none">
+    <div>
+      <NuxtLink :to="`/articles/${article.slug}`" class="block focus-visible:outline-none">
       <div class="relative overflow-hidden rounded">
         <span class="absolute top-5 start-5 z-10 inline-flex rounded bg-white px-2 py-1 text-xs font-medium text-brand-content before:inline-block before:size-2 before:rounded-full before:bg-[#E63946] before:translate-y-1/2 before:me-2">Live Updates</span>
         <NuxtImg
@@ -37,6 +38,7 @@ withDefaults(defineProps<{ article?: Article; loading?: boolean }>(), {
           class="w-full object-cover transition-transform duration-500 ease-out group-hover:scale-110 group-focus-within:scale-110"
         />
       </div>
+      </NuxtLink>
 
       <!-- Tags -->
       <div v-if="Array.isArray(article.tags)" class="mt-6 flex gap-5 items-center">
@@ -44,15 +46,17 @@ withDefaults(defineProps<{ article?: Article; loading?: boolean }>(), {
       </div>
 
       <div class="mt-6 w-full flex flex-wrap justify-between items-start gap-2">
-        <h1 class="max-w-4xl text-heading-1 font-medium leading-tight text-brand-content sm:text-heading-1">
-          {{ article.title }}
-        </h1>
+        <NuxtLink :to="`/articles/${article.slug}`" class="block focus-visible:outline-none">
+          <h1 class="max-w-4xl text-heading-1 font-medium leading-tight text-brand-content sm:text-heading-1">
+            {{ article.title }}
+          </h1>
+        </NuxtLink>
 
-        <NuxtLink to="" class="arrow-link flex gap-1 text-sm">
+        <NuxtLink :to="`/articles/${article.slug}`" class="arrow-link flex gap-1 text-sm">
           Read Article
           <IconArrowCircleRight class="arrow-link-icon" />
         </NuxtLink>
       </div>
-    </NuxtLink>
+    </div>
   </article>
 </template>
