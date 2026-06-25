@@ -1,6 +1,9 @@
 export type ArticleBodyBlock = {
   type: 'paragraph'
   text: string
+} | {
+  type: 'list'
+  items: string[]
 }
 
 export type Article = {
