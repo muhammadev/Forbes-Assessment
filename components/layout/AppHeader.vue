@@ -66,12 +66,27 @@ onBeforeUnmount(() => {
             :class="{ 'header-nav-marquee-paused': isNavMarqueePaused }"
           >
             <li v-for="item in navigation" :key="item.label">
-              <NuxtLink :to="item.href" class="whitespace-nowrap text-xs font-medium hover:text-brand-red">
+              <NuxtLink
+                :to="item.href"
+                class="whitespace-nowrap text-xs font-medium hover:text-brand-red"
+                active-class="text-brand-red"
+              >
                 {{ item.label }}
               </NuxtLink>
             </li>
-            <li v-for="item in navigation" :key="`duplicate-${item.label}`" class="sm:hidden" aria-hidden="true">
-              <NuxtLink :to="item.href" class="whitespace-nowrap text-xs font-medium" tabindex="-1">
+            <li
+              v-for="item in navigation"
+              :key="`duplicate-${item.label}`"
+              class="sm:hidden"
+              :class="{ hidden: isNavMarqueePaused }"
+              aria-hidden="true"
+            >
+              <NuxtLink
+                :to="item.href"
+                class="whitespace-nowrap text-xs font-medium hover:text-brand-red"
+                active-class="text-brand-red"
+                tabindex="-1"
+              >
                 {{ item.label }}
               </NuxtLink>
             </li>
@@ -98,7 +113,8 @@ onBeforeUnmount(() => {
   }
 
   .header-nav-marquee-paused {
-    animation-play-state: paused;
+    animation: none;
+    transform: translateX(0);
   }
 }
 
