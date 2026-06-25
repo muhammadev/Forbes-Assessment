@@ -7,16 +7,13 @@ defineProps<{
 </script>
 
 <template>
-  <div
-    class="text-xs capitalize"
-  >
+  <div class="text-xs capitalize">
     <template v-for="(meta, index) in metaItems" :key="meta.key">
       <span
         v-if="index > 0"
         aria-hidden="true"
         class="mx-3"
-        >—</span
-      >
+      >—</span>
 
       <time v-if="meta.key === 'publishedAt'" :datetime="meta.datetime">
         {{ meta.label }}
