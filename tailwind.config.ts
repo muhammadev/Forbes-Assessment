@@ -15,7 +15,7 @@ export default <Partial<Config>>{
         },
       },
       fontFamily: {
-        sans: ['Inter', ...defaultTheme.fontFamily.sans],
+        sans: ['Inter', 'Arial', 'Helvetica', ...defaultTheme.fontFamily.sans],
         brand: ['Georgia', 'Times New Roman', 'serif'],
       },
       fontSize: {
