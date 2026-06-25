@@ -1,8 +1,6 @@
-import type { CategorySlug } from '~/types/category'
-
-export type ArticleImage = {
-  src: string
-  alt: string
+export type ArticleBodyBlock = {
+  type: 'paragraph'
+  text: string
 }
 
 export type Article = {
@@ -10,13 +8,27 @@ export type Article = {
   slug: string
   title: string
   excerpt: string
-  category: CategorySlug
+  content: string
+  body?: ArticleBodyBlock[]
+  category: string
   author: string
   publishedAt: string
   readingTime: string
-  image: ArticleImage
+  featuredImage: string | null
+  isVideo: boolean
   tags?: string[]
   updatedAt?: string
   isFeatured?: boolean
   isTrending?: boolean
+}
+
+export type ArticleVariant = 'vertical' | 'horizontal-compact' | 'horizontal-rich' | 'featured-overlay' | 'featured-split'
+
+export type ArticleMetaKey = 'author' | 'readingTime' | 'publishedAt' | 'category'
+
+export type ArticleMetaItem = {
+  key: ArticleMetaKey
+  label: string
+  href?: string
+  datetime?: string
 }

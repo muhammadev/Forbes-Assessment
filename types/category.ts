@@ -1,14 +1,16 @@
-export type CategorySlug =
-  | 'business'
-  | 'leadership'
-  | 'entrepreneurs'
-  | 'innovation'
-  | 'lifestyle'
-  | 'money'
-  | 'lists'
-
 export type Category = {
   id: number
   name: string
-  slug: CategorySlug
+  slug: string
+}
+
+export type CategoryHighlight = {
+  id: number
+  title: string
+  slug: string
+  description: string
+  image: {
+    src: string
+    alt: string
+  }
 }
